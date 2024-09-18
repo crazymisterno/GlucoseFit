@@ -1,4 +1,4 @@
-import { View, Modal, Pressable, Text, Image, ScrollView, StyleSheet, PixelRatio } from 'react-native'
+import { View, Modal, Pressable, Text, Image, ScrollView, StyleSheet, PixelRatio, Alert } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
 import { useState } from "react";
 import '../Meals/breakfast';
@@ -91,8 +91,13 @@ export default function Overview() {
       </View>
       <ScrollView
       style={styles.scrollView}>
-        <Pressable style={StyleSheet.compose(styles.table, {marginTop: PixelRatio.getPixelSizeForLayoutSize(9)})}
-        onPress={() => setBreakfastView(true)}>
+        <Pressable
+        onPress={() => setBreakfastView(true)}
+        style={[
+        styles.table, {marginTop: PixelRatio.getPixelSizeForLayoutSize(9)}]}
+        >
+
+
           <View style={styles.tableRow}>
             <Text style={{flex: 1,marginLeft: PixelRatio.getPixelSizeForLayoutSize(25)}}>Breakfast</Text>
             <Text style={{flex: 1}}>Carbs</Text>
@@ -164,7 +169,7 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     backgroundColor: 'gray',
-    height: PixelRatio.getPixelSizeForLayoutSize(300)
+    height: PixelRatio.getPixelSizeForLayoutSize(400)
   },
   tableRow: {
     flexDirection: 'row',
