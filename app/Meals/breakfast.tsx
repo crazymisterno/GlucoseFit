@@ -1,12 +1,22 @@
-import {View, StyleSheet, PixelRatio, Pressable, Text} from 'react-native'
+import { useState } from 'react';
+import {View, StyleSheet, PixelRatio, Pressable, Text, Modal } from 'react-native'
 import { ScrollView } from 'react-native'
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 
-
-export default function BreakfastView() {
+export default function BreakfastView(visible: boolean, updater: (e: boolean) => void) {
     return (
-        <View>
+        <Modal
+      animationType="slide"
+      onRequestClose={() => updater(false)}
+      visible={visible}>
+      <SafeAreaProvider>
+        <SafeAreaView>
             <View style={styles.bar}>
-                <Text style={[styles.text, {fontSize: 24, paddingRight: PixelRatio.getPixelSizeForLayoutSize(12)}]}>Breakfast</Text>
+            <Pressable
+                onPress={() => updater(false)}>
+                <Text style={[styles.text, {fontSize: 24}]}>{"<"}</Text>
+            </Pressable>
+                <Text style={[styles.text, {fontSize: 24, paddingLeft: PixelRatio.getPixelSizeForLayoutSize(12), paddingRight: PixelRatio.getPixelSizeForLayoutSize(12)}]}>Breakfast</Text>
                 <Pressable>
                     <Text style={[styles.text, {fontSize: 24}]}>+</Text>
                 </Pressable>
@@ -55,7 +65,9 @@ export default function BreakfastView() {
                     <Text>{"{Insert fat here}"}</Text>
                 </View>
             </View>
-        </View>
+        </SafeAreaView>
+        </SafeAreaProvider>
+        </Modal>
     )
 }
 

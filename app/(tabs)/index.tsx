@@ -1,21 +1,19 @@
-import { View, Modal, Pressable, Text, Image, ScrollView, StyleSheet, PixelRatio, Alert } from 'react-native'
+import { View, Modal, Pressable, Text, ScrollView, StyleSheet, PixelRatio } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
 import { useState } from "react";
 import '../Meals/breakfast';
-import BreakfastInfo from "../Meals/breakfast";
-import LunchInfo from "../Meals/lunch";
-import DinnerInfo from "../Meals/dinner";
-import SnackInfo from "../Meals/snack";
-import { useNavigation } from "expo-router";
+import BreakfastView from "../Meals/breakfast";
+import "../Meals/breakfast"
+import LunchView from "../Meals/lunch";
+import DinnerView from "../Meals/dinner";
+import SnackView from "../Meals/snack";
 import {
   SafeAreaView,
-  SafeAreaProvider,
-  SafeAreaInsetsContext,
-  useSafeAreaInsets,
+
 } from 'react-native-safe-area-context';
 
 export default function Overview() {
-  const [breakfastView, setBreakfastView] = useState(false);
+  const [breakfastView, setBreakfastView] = useState(false)
   const [lunchView, setLunchView] = useState(false);
   const [dinnerView, setDinnerView] = useState(false);
   const [snackView, setSnackView] = useState(false);
@@ -26,30 +24,10 @@ export default function Overview() {
       style='auto'
       backgroundColor='black'
       />
-      <Modal
-      animationType="slide"
-      onRequestClose={() => setBreakfastView(false)}
-      visible={breakfastView}>
-        {BreakfastInfo()}
-      </Modal>
-      <Modal
-      animationType="slide"
-      onRequestClose={() => setLunchView(false)}
-      visible={lunchView}>
-        {LunchInfo()}
-      </Modal>
-      <Modal
-      animationType="slide"
-      onRequestClose={() => setDinnerView(false)}
-      visible={dinnerView}>
-        {DinnerInfo()}
-      </Modal>
-      <Modal
-      animationType="slide"
-      onRequestClose={() => setSnackView(false)}
-      visible={snackView}>
-        {SnackInfo()}
-      </Modal>
+      {BreakfastView(breakfastView, setBreakfastView)}
+      {LunchView(lunchView, setLunchView)}
+      {DinnerView(dinnerView, setDinnerView)}
+      {SnackView(snackView, setSnackView)}
       <View
       style={styles.bar}>
         <Pressable
@@ -96,8 +74,6 @@ export default function Overview() {
         style={[
         styles.table, {marginTop: PixelRatio.getPixelSizeForLayoutSize(9)}]}
         >
-
-
           <View style={styles.tableRow}>
             <Text style={{flex: 1,marginLeft: PixelRatio.getPixelSizeForLayoutSize(25)}}>Breakfast</Text>
             <Text style={{flex: 1}}>Carbs</Text>
