@@ -1,9 +1,12 @@
-import { useState } from 'react';
+import { useState } from 'react'
 import {View, StyleSheet, PixelRatio, Pressable, Text, Modal } from 'react-native'
 import { ScrollView } from 'react-native'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
+import '@/app/Meals/Submenus/add-food'
+import AddFood from '@/app/Meals/Submenus/add-food'
 
 export default function BreakfastView(visible: boolean, updater: (e: boolean) => void) {
+    const [addingFood, setAddingFood] = useState(false);
     return (
         <Modal
       animationType="slide"
@@ -11,13 +14,16 @@ export default function BreakfastView(visible: boolean, updater: (e: boolean) =>
       visible={visible}>
       <SafeAreaProvider>
         <SafeAreaView>
+            {AddFood(addingFood, setAddingFood)}
             <View style={styles.bar}>
             <Pressable
                 onPress={() => updater(false)}>
                 <Text style={[styles.text, {fontSize: 24}]}>{"<"}</Text>
             </Pressable>
                 <Text style={[styles.text, {fontSize: 24, paddingLeft: PixelRatio.getPixelSizeForLayoutSize(12), paddingRight: PixelRatio.getPixelSizeForLayoutSize(12)}]}>Breakfast</Text>
-                <Pressable>
+                <Pressable
+                onPress={() => setAddingFood(true)}
+                >
                     <Text style={[styles.text, {fontSize: 24}]}>+</Text>
                 </Pressable>
             </View>
